@@ -1,0 +1,27 @@
+
+{% extends "govuk_template.html" %}
+{% block content %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <h1 class="form-title heading-large">Check a Government register</h1>
+
+      <form class="form" action="/register-search" method="POST">
+        <div class="form-group">
+          <label class="form-label-bold" for="register-id">Register ID
+            <span class="form-hint">
+              Check a register using a register ID - this is normally a word and some number or letters, separated by a colon.
+              <br>
+              For example, school:48593,  licence:7G98FE3029DA4 or food-hygine:2345
+            </span>
+          </label>
+          <input type="text" class="form-control" id="register-id">
+        </div>
+        <div class="form-group">
+          <input type="submit" class="button" value="Check">
+        </div>
+
+    </div><!-- end .column-two-thirds -->
+  </div><!-- end .grid-row -->
+
+{% endblock %}
