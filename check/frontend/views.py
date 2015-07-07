@@ -32,7 +32,7 @@ def check():
             url = _get_url(register, key)
             resp = requests.get(url, headers=headers)
             if resp.status_code == 200:
-                current_app.logger.info(resp.json())
+                #TODO get address data
                 return render_template('check.html', entry=resp.json())
             else:
                 message = "There was a problem checking the %s register" % register
@@ -48,5 +48,5 @@ def check():
 def _get_url(register, key):
     config_name = register.replace('-','_').upper()
     reg_url = current_app.config[config_name]
-    url = '%s/food-hygiene/%s.json' % (reg_url, key)
+    url = '%s/%s/%s.json' % (reg_url, register, key)
     return url
