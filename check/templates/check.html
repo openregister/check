@@ -1,0 +1,17 @@
+
+{% extends "govuk_template.html" %}
+{% block content %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <h1 class="form-title heading-large">{{name}}</h1>
+
+      {% for key, val in entry.entry.items() %}
+        <p>{{key}} : {{val}}</p>
+      {% endfor %}
+
+      <a href="{{url_for('frontend.index')}}" class="button">Check another register</a>
+    </div><!-- end .column-two-thirds -->
+  </div><!-- end .grid-row -->
+
+{% endblock %}
