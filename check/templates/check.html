@@ -9,6 +9,11 @@
       {% for key, val in entry.entry.items() %}
         <p>{{key}} : {{val}}</p>
       {% endfor %}
+      {% if address %}
+        {% for key, val in address.entry.items() %}
+          <p>{{key}} : {{val}}</p>
+        {% endfor %}
+      {% endif %}
 
       <a href="{{url_for('frontend.index')}}" class="button">Check another register</a>
     </div><!-- end .column-two-thirds -->

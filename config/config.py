@@ -6,6 +6,7 @@ class Config(object):
     PROJECT_ROOT = os.path.abspath(os.path.join(APP_ROOT, os.pardir))
     SECRET_KEY = os.environ.get('SECRET_KEY')
     FOOD_HYGIENE = os.environ.get('FOOD_HYGIENE_REGISTER')
+    ADDRESS_REGISTER = os.environ.get('ADDRESS_REGISTER')
 
 class DevelopmentConfig(Config):
     DEBUG = True

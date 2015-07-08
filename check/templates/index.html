@@ -6,37 +6,28 @@
     <div class="column-two-thirds">
       <h1 class="form-title heading-large">Check a Government register</h1>
 
-      {% if entry %}
-        {% for key, val in entry.entry.items() %}
-          <p>{{key}} : {{val}}</p>
-        {% endfor %}
-        <a href="{{url_for('frontend.index')}}" class="button">Check another register</a>
-      {% else %}
-        <form class="form" action="{{url_for('frontend.index')}}" method="POST">
-
-          <div class="form-group">
-            <div class="{% if form.register_id.errors %}error{% endif %}">
-              {{ form.register_id.label(class_="form-label-bold")}}
-               <span class="form-hint">
-                Check a register using a register ID - this is normally a word and some number or letters, separated by a colon.
-                <br>
-                For example food-hygiene:2345
-              </span>
-              {{ form.register_id(class_="form-control")|safe }}
-              {% if form.register_id.errors %}
-                {% for error in form.register_id.errors %}
-                  <span class="error">{{error}}</span>
-                {% endfor %}
-              {% endif %}
-            </div>
+      <form class="form" action="{{url_for('frontend.index')}}" method="POST">
+        <div class="form-group">
+          <div class="{% if form.register_id.errors %}error{% endif %}">
+            {{ form.register_id.label(class_="form-label-bold")}}
+            <span class="form-hint">
+              Check a register using a register ID - this is normally a word and some number or letters, separated by a colon.
+              <br>
+                For example food-hygiene:2764
+            </span>
+            {{ form.register_id(class_="form-control")|safe }}
+            {% if form.register_id.errors %}
+              {% for error in form.register_id.errors %}
+                <span class="error">{{error}}</span>
+              {% endfor %}
+            {% endif %}
           </div>
-          <div class="form-group">
-            <input type="submit" class="button" value="Check">
-          </div>
-           {{ form.csrf_token }}
-        </form>
-
-      {% endif %}
+        </div>
+        <div class="form-group">
+          <input type="submit" class="button" value="Check">
+        </div>
+        {{ form.csrf_token }}
+      </form>
 
     </div><!-- end .column-two-thirds -->
   </div><!-- end .grid-row -->

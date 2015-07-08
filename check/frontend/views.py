@@ -18,7 +18,7 @@ headers = {'Content-Type': 'application/json'}
 frontend = Blueprint('frontend', __name__, template_folder='templates')
 
 
-@frontend.route('/', methods=['GET','POST'])
+@frontend.route('/', methods=['GET', 'POST'])
 def index():
     form = CheckForm()
     if form.validate_on_submit():
@@ -27,8 +27,9 @@ def index():
             url = _get_url(register, key)
             resp = requests.get(url, headers=headers)
             if resp.status_code == 200:
-                #TODO get address data
-                return render_template('check.html', entry=resp.json())
+                entry = resp.json()
+                address = _get_address(entry)
+                return render_template('check.html', entry=entry, address=address)
             else:
                 message = "There was a problem checking the %s register" % register
                 flash(message)
@@ -40,8 +41,21 @@ def index():
     else:
         return render_template('index.html', form=form)
 
+
 def _get_url(register, key):
-    config_name = register.replace('-','_').upper()
+    config_name = register.replace('-', '_').upper()
     reg_url = current_app.config[config_name]
     url = '%s/%s/%s.json' % (reg_url, register, key)
     return url
+
+
+def _get_address(entry):
+    address_key = entry['entry']['address']
+    address_register_url = current_app.config['ADDRESS_REGISTER']
+    url = '%s/address/%s.json' % (address_register_url, address_key)
+    try:
+        resp = requests.get(url, headers=headers)
+        resp.raise_for_status()
+        return resp.json()
+    except Exception as e:
+        return None
