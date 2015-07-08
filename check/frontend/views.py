@@ -22,14 +22,14 @@ frontend = Blueprint('frontend', __name__, template_folder='templates')
 def index():
     form = CheckForm()
     if form.validate_on_submit():
+        register_id = form.data['register_id']
         try:
-            register, key = form.data['register_id'].split(':')
+            register, key = register_id.split(':')
             return redirect(url_for('frontend.check', register=register, key=key))
-        except KeyError as e:
-            message = "This application is not yet configured to check the %s register" % register
+        except Exception as e:
+            message = "There was a problem checking the %s register" % register_id
             flash(message)
-            return redirect(url_for('.index'))
-
+            abort(500)
     return render_template('index.html', form=form)
 
 
@@ -38,17 +38,19 @@ def check(register, key):
     try:
         url = _get_url(register, key)
         resp = requests.get(url, headers=headers)
-        if resp.status_code == 200:
-            entry = resp.json()
-            address = _get_address(entry)
-            return render_template('check.html', entry=entry, address=address)
-        else:
-            message = "There was a problem checking the %s register" % register
-            flash(message)
-            abort(resp.status_code)
-    except KeyError as e:
-        message = "This application is not yet configured to check the %sregister" % register
+        resp.raise_for_status()
+        entry = resp.json()
+        address = _get_address(entry)
+        return render_template('check.html', entry=entry, address=address)
+    except requests.exceptions.HTTPError as e:
+        message = "There was a problem checking the %s register with key %s" % (register, key)
         flash(message)
+        abort(resp.status_code)
+    except KeyError as e:
+        message = "There was a problem checking the %s register with key %s" % (register, key)
+        flash(message)
+        abort(404)
+
     return redirect(url_for('.index'))
 
 
