@@ -18,13 +18,8 @@ headers = {'Content-Type': 'application/json'}
 frontend = Blueprint('frontend', __name__, template_folder='templates')
 
 
-@frontend.route('/')
+@frontend.route('/', methods=['GET','POST'])
 def index():
-    form = CheckForm()
-    return render_template('index.html', form=form)
-
-@frontend.route('/check', methods=['POST'])
-def check():
     form = CheckForm()
     if form.validate_on_submit():
         register, key = form.data['register_id'].split(':')
