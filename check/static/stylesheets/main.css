@@ -1336,3 +1336,26 @@ ol {
 .copyright span {
   margin-right: 5px;
 }
+
+.check {
+  padding-right: 2rem;
+}
+
+.related-container {
+  margin-top: 45px;
+}
+
+.related-container {
+  border-top: 10px solid #005ea5;
+}
+
+.related-container ul, li{
+  list-style: none;
+}
+
+  @media (max-width: 640px) {
+    .related-container {
+      border: none;
+    }
+}
+

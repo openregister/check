@@ -1,11 +1,9 @@
 {% extends "govuk_template.html" %}
 
-{% block content %}
+  {% block content %}
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
+    <div class="check">
       <h1 class="form-title heading-large">Check a Government register</h1>
-
       <form class="form" action="{{url_for('frontend.index')}}" method="POST">
         <div class="form-group">
           <div class="{% if form.register_id.errors %}error{% endif %}">
@@ -28,7 +26,22 @@
         </div>
         {{ form.csrf_token }}
       </form>
-    </div><!-- end .column-two-thirds -->
-  </div><!-- end .grid-row -->
+    </div><!-- end .check -->
 
-{% endblock %}
+  {% endblock %}
+
+  {% block related %}
+
+    <div class="related-container">
+      <div class="related">
+        <h2 class="heading-medium">Registers</h2>
+        <nav role="navigation" aria-labelledby="parent-subsection">
+          <ul>
+            <li><a href="http://www.openregister.org">About registers</a></li>
+            <li><a href="http://register.openregister.org">Search for a register</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+  {% endblock %}

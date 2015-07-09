@@ -99,6 +99,8 @@
 
     {% block after_header %}{% endblock %}
 
+
+
     <main id="wrapper" role="main">
       <div id="content">
         <div class="inner-block">
@@ -123,8 +125,20 @@
               </div>
             {% endif %}
           {%- endwith %}
-          {% block content %}{% endblock %}
+
         </div>
+
+        <div class="grid-row">
+          <div class="column-two-thirds">
+            {% block content %}{% endblock %}
+          </div>
+          <div class="column-third">
+            {% block related %}{% endblock %}
+          </div>
+        </div>
+
+
+
       </div>
     </main>
 
