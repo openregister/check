@@ -1,22 +1,86 @@
 
 {% extends "govuk_template.html" %}
+
+{% block head %}
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
+{% endblock %}
+
 {% block content %}
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
-      <h1 class="form-title heading-large">{{name}}</h1>
+  <div id="content">
+    <div class="grid-row">
+      <div class="column-half">
 
-      {% for key, val in entry.entry.items() %}
-        <p>{{key}} : {{val}}</p>
-      {% endfor %}
-      {% if address %}
-        {% for key, val in address.entry.items() %}
-          <p>{{key}} : {{val}}</p>
-        {% endfor %}
-      {% endif %}
+        <h1 class="heading-medium">{{entry.entry.name}}</h1>
 
-      <a href="{{url_for('frontend.index')}}" class="button">Check another register</a>
-    </div><!-- end .column-two-thirds -->
-  </div><!-- end .grid-row -->
+        <h2 class="heading-small">Food hygiene rating</h2>
+        <p>{{entry.entry.rating}}</p>
 
+        <h2 class="heading-small">Date of rating</h2>
+        <p>{{entry.entry['date-of-rating']}}</p>
+
+        <h2 class="heading-small">Address</h2>
+        <div class="address" itemscope itemtype="http://schema.org/PostalAddress">
+          {% if address.entry.property %}
+            <span>{{address.entry.property}}</span><br/>
+          {% endif %}
+          {% if address.entry.street %}
+             <span itemprop="streetAddress">{{address.entry.street}}</span><br/>
+          {% endif %}
+          {% if address.entry.town %}
+              <span itemprop="addressLocality">{{address.entry.town}}</span><br/>
+          {% elif address.entry.locality %}
+              <span itemprop="addressLocality">{{address.entry.locality}}</span><br/>
+          {% elif address.entry.area %}
+              <span itemprop="addressLocality">{{address.entry.area}}</span><br/>
+          {% endif %}
+          <span itemprop="postalCode">{{address.entry.postcode}}</span><br/>
+          <span itemprop="addressCountry">{{address.entry['country']}}</span>
+        </div>
+      </div>
+
+      <div class="column-half">
+        <div id="map-canvas"></div>
+      </div>
+
+    </div>
+
+    <div class="grid-row">
+      <div class="column-half" id="check-another">
+       <a href="{{url_for('frontend.index')}}" class="button">Check another register</a>
+      </div>
+    </div>
+
+  </div>
+
+{% endblock %}
+
+{% block body_end %}
+  <script>
+      var initialize = function () {
+        console.log('IASDFASDFASD');
+          var mapCanvas = document.getElementById('map-canvas'),
+              coordinates = new google.maps.LatLng({{ address.entry.latitude }}, {{ address.entry.longitude }}),
+              mapOptions = {
+                  center: coordinates,
+                  zoom: 15,
+                  mapTypeId: google.maps.MapTypeId.ROADMAP,
+                  zoomControl: true,
+                  zoomControlOptions: {
+                    style: google.maps.ZoomControlStyle.SMALL
+                  }
+              },
+              map = new google.maps.Map(mapCanvas, mapOptions),
+              marker = new google.maps.Marker({
+                  position: coordinates,
+                  map: map,
+                  title: "{{ entry.entry.name }}"
+              });
+      };
+
+      $(document).ready(function(){
+          initialize();
+      });
+
+  </script>
 {% endblock %}

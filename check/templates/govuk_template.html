@@ -57,6 +57,8 @@
     <!-- gov uk elements stylesheet -->
     <link rel="stylesheet" type="text/css" href="{{asset_path}}stylesheets/main.css">
 
+    <script type="text/javascript" src="{{asset_path}}javascripts/vendor/jquery/jquery.js"></script>
+
     {% block head %}{% endblock %}
   </head>
 
@@ -129,12 +131,11 @@
         </div>
 
         <div class="grid-row">
-          <div class="column-two-thirds">
-            {% block content %}{% endblock %}
-          </div>
-          <div class="column-third">
-            {% block related %}{% endblock %}
-          </div>
+
+          {% block content %}{% endblock %}
+
+          {% block related %}{% endblock %}
+
         </div>
 
 

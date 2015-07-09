@@ -2,6 +2,7 @@
 
   {% block content %}
 
+  <div class="column-two-thirds">
     <div class="check">
       <h1 class="form-title heading-large">Check a Government register</h1>
       <form class="form" action="{{url_for('frontend.index')}}" method="POST">
@@ -27,11 +28,12 @@
         {{ form.csrf_token }}
       </form>
     </div><!-- end .check -->
-
+  </div>
   {% endblock %}
 
   {% block related %}
 
+  <div class="column-third">
     <div class="related-container">
       <div class="related">
         <h2 class="heading-medium">Registers</h2>
@@ -43,5 +45,6 @@
         </nav>
       </div>
     </div>
+  </div>
 
   {% endblock %}

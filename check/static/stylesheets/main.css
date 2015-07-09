@@ -1341,8 +1341,16 @@ ol {
   padding-right: 2rem;
 }
 
+#check-another {
+  margin-top: 20px;
+}
+
 .related-container {
   margin-top: 45px;
+}
+
+.related h2 {
+  margin-top: 0.9rem;
 }
 
 .related-container {

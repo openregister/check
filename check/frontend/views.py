@@ -22,7 +22,7 @@ frontend = Blueprint('frontend', __name__, template_folder='templates')
 def index():
     form = CheckForm()
     if form.validate_on_submit():
-        register_id = form.data['register_id']
+        register_id = form.data['register_id'].strip().lower()
         try:
             register, key = register_id.split(':')
             return redirect(url_for('frontend.check', register=register, key=key))
