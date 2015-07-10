@@ -1361,6 +1361,12 @@ ol {
   list-style: none;
 }
 
+#map-canvas {
+  margin-top: 40px;
+  width: 100%;
+  height: 400px;
+}
+
   @media (max-width: 640px) {
     .related-container {
       border: none;
