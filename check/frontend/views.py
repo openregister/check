@@ -43,7 +43,7 @@ def check(register, key):
         address = _get_address(entry)
         return render_template('check.html', entry=entry, address=address)
     except requests.exceptions.HTTPError as e:
-        message = "There was a problem checking the %s register with key %s" % (register, key)
+        message = "We couldn't find a record for %s:%s" % (register, key)
         flash(message)
         abort(resp.status_code)
     except KeyError as e:
@@ -52,6 +52,15 @@ def check(register, key):
         abort(404)
 
     return redirect(url_for('.index'))
+
+
+@frontend.route('/improve')
+def improve():
+    register = request.args.get('register')
+    key = request.args.get('key')
+    if not register and not key:
+        abort(404)
+    return render_template('improve.html', register=register, key=key)
 
 
 def _get_url(register, key):

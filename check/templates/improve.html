@@ -1,0 +1,34 @@
+
+{% extends "govuk_template.html" %}
+
+{% block head %}
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
+{% endblock %}
+
+{% block content %}
+
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        <h1 class="heading-large">Help us improve our records</h1>
+        <h2 class="heading-small">We couldn't find a record for</h2>
+        <p>{{register}}:{{key}}</p>
+
+        <form id="improve">
+          <div class="form-group">
+            <label class="form-label-bold" for="message">If you think this is an error, please give us details</label>
+            <span class="form-hint">For example, where you found this ID</span>
+            <textarea id="message" rows="10" cols="50"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label-bold" for="email">Your email</label>
+            <span class="form-hint">If you would like to be kept up to date on this issue</span>
+            <input class="form-control" id="email" type="email" />
+          </div>
+          <div class="form-group">
+            <input type="submit" class="button" value="Submit" disabled="true"/>
+          </div>
+        </form>
+
+      </div>
+    </div>
+{% endblock %}

@@ -10,6 +10,22 @@ from flask import Flask, render_template
 def asset_path_context_processor():
     return {'asset_path': '/static/'}
 
+
+def register_from_path(string):
+    parts = string.split('/')
+    if len(parts) > 2:
+        return parts[2]
+    else:
+        return 'test-register'
+
+def key_from_path(string):
+    parts = string.split('/')
+    if len(parts) > 2:
+        return parts[3]
+    else:
+        return 'test-key'
+
+
 def create_app(config_filename):
     ''' An application factory, as explained here:
         http://flask.pocoo.org/docs/patterns/appfactories/
@@ -19,7 +35,10 @@ def create_app(config_filename):
     register_errorhandlers(app)
     register_blueprints(app)
     app.context_processor(asset_path_context_processor)
+    app.jinja_env.filters['register_from_path'] = register_from_path
+    app.jinja_env.filters['key_from_path'] = key_from_path
     return app
+
 
 def register_errorhandlers(app):
     def render_error(error):
@@ -29,6 +48,7 @@ def register_errorhandlers(app):
     for errcode in [401, 404, 500]:
         app.errorhandler(errcode)(render_error)
     return None
+
 
 def register_blueprints(app):
     from check.frontend.views import frontend
