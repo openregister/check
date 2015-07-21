@@ -54,7 +54,6 @@
 {% block body_end %}
   <script>
       var initialize = function () {
-        console.log('IASDFASDFASD');
           var mapCanvas = document.getElementById('map-canvas'),
               coordinates = new google.maps.LatLng({{ address.entry.latitude }}, {{ address.entry.longitude }}),
               mapOptions = {
