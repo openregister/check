@@ -11,21 +11,6 @@ def asset_path_context_processor():
     return {'asset_path': '/static/'}
 
 
-def register_from_path(string):
-    parts = string.split('/')
-    if len(parts) > 2:
-        return parts[2]
-    else:
-        return 'test-register'
-
-def key_from_path(string):
-    parts = string.split('/')
-    if len(parts) > 2:
-        return parts[3]
-    else:
-        return 'test-key'
-
-
 def create_app(config_filename):
     ''' An application factory, as explained here:
         http://flask.pocoo.org/docs/patterns/appfactories/
@@ -35,8 +20,6 @@ def create_app(config_filename):
     register_errorhandlers(app)
     register_blueprints(app)
     app.context_processor(asset_path_context_processor)
-    app.jinja_env.filters['register_from_path'] = register_from_path
-    app.jinja_env.filters['key_from_path'] = key_from_path
     return app
 
 

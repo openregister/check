@@ -4,10 +4,7 @@
 {% block content %}
     <div>
       <h1 class="heading-medium">Page not found</h1>
-        <ul>
-          <li>If you think this is wrong you can <a href="{{url_for('frontend.improve', register=request.path|register_from_path, key=request.path|key_from_path )}}">help us improve our records</a>.</li>
-          <li>If you think you made a mistake go back and <a href="{{url_for('frontend.index')}}">check another licence or certificate</a>.</li>
-        </ul>
+      <p>If you think you made a mistake go back and <a href="{{url_for('frontend.index')}}">check another licence or certificate</a>.</p>
     </div>
 
 {% endblock %}

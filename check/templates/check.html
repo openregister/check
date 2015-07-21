@@ -6,52 +6,56 @@
 {% endblock %}
 
 {% block content %}
-
+  {% if entry %}
     <div class="grid-row">
       <div class="column-half">
-
-        <h1 class="heading-large">{{entry.entry.name}}</h1>
-
-        <p><img src="{{ asset_path }}images/ratings/rating-{{entry.entry.rating | lower | replace(' ','-')}}.png"/></p>
-
-        <h2 class="heading-small">Date of rating</h2>
-        <p>{{entry.entry['date-of-rating']}}</p>
-
-        <h2 class="heading-small">Address</h2>
-        <div class="address" itemscope itemtype="http://schema.org/PostalAddress">
-          {% if address.entry.property %}
-            <span>{{address.entry.property}}</span><br/>
-          {% endif %}
-          {% if address.entry.street %}
-             <span itemprop="streetAddress">{{address.entry.street}}</span><br/>
-          {% endif %}
-          {% if address.entry.town %}
-              <span itemprop="addressLocality">{{address.entry.town}}</span><br/>
-          {% elif address.entry.locality %}
-              <span itemprop="addressLocality">{{address.entry.locality}}</span><br/>
-          {% elif address.entry.area %}
-              <span itemprop="addressLocality">{{address.entry.area}}</span><br/>
-          {% endif %}
-          <span itemprop="postalCode">{{address.entry.postcode}}</span><br/>
-          <span itemprop="addressCountry">{{address.entry['country']}}</span>
-        </div>
+          <h1 class="heading-large">{{entry.entry.name}}</h1>
+          <p><img src="{{ asset_path }}images/ratings/rating-{{entry.entry.rating | lower | replace(' ','-')}}.png"/></p>
+          <h2 class="heading-small">Date of rating</h2>
+          <p>{{entry.entry['date-of-rating']}}</p>
+          <h2 class="heading-small">Address</h2>
+          <div class="address" itemscope itemtype="http://schema.org/PostalAddress">
+            {% if address.entry.property %}
+              <span>{{address.entry.property}}</span><br/>
+            {% endif %}
+            {% if address.entry.street %}
+               <span itemprop="streetAddress">{{address.entry.street}}</span><br/>
+            {% endif %}
+            {% if address.entry.town %}
+                <span itemprop="addressLocality">{{address.entry.town}}</span><br/>
+            {% elif address.entry.locality %}
+                <span itemprop="addressLocality">{{address.entry.locality}}</span><br/>
+            {% elif address.entry.area %}
+                <span itemprop="addressLocality">{{address.entry.area}}</span><br/>
+            {% endif %}
+            <span itemprop="postalCode">{{address.entry.postcode}}</span><br/>
+            <span itemprop="addressCountry">{{address.entry['country']}}</span>
+          </div>
       </div>
-
       <div class="column-half">
         <div id="map-canvas"></div>
-      </div>
-
-    </div>
-
-    <div class="grid-row">
-      <div class="column-half" id="check-another">
-        <a href="{{url_for('frontend.index')}}" class="button">Check another licence or certificate</a>
         </div>
-    </div>
+      </div>
+      <div class="grid-row">
+        <div class="column-half" id="check-another">
+          <a href="{{url_for('frontend.index')}}" class="button">Check another licence or certificate</a>
+          </div>
+      </div>
+    {% else %}
+      <div class="grid-row">
+        <div class="column-two-thirds">
+           <ul>
+            <li>If you think this is wrong you can <a href="{{url_for('frontend.improve', register=register, key=key)}}">help us improve our records</a>.</li>
+            <li>If you think you made a mistake go back and <a href="{{url_for('frontend.index')}}">check another licence or certificate</a>.</li>
+          </ul>
+        </div>
+      </div>
+    {% endif %}
 
 {% endblock %}
 
 {% block body_end %}
+ {% if entry %}
   <script>
       var initialize = function () {
           var mapCanvas = document.getElementById('map-canvas'),
@@ -78,4 +82,5 @@
       });
 
   </script>
+{% endif %}
 {% endblock %}
