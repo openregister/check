@@ -10,10 +10,9 @@
     <div class="grid-row">
       <div class="column-half">
 
-        <h1 class="heading-medium">{{entry.entry.name}}</h1>
+        <h1 class="heading-large">{{entry.entry.name}}</h1>
 
-        <h2 class="heading-small">Food hygiene rating</h2>
-        <p>{{entry.entry.rating}}</p>
+        <p><img src="{{ asset_path }}images/ratings/rating-{{entry.entry.rating}}.png"/></p>
 
         <h2 class="heading-small">Date of rating</h2>
         <p>{{entry.entry['date-of-rating']}}</p>
@@ -46,7 +45,7 @@
 
     <div class="grid-row">
       <div class="column-half" id="check-another">
-        <a href="{{url_for('frontend.index')}}" class="button">Check another register</a>
+        <a href="{{url_for('frontend.index')}}" class="button">Check another licence or certificate</a>
         </div>
     </div>
 

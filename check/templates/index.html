@@ -4,15 +4,15 @@
     <div class="grid-row">
       <div class="column-two-thirds">
         <div class="check">
-          <h1 class="form-title heading-large">Check a Government register</h1>
+          <h1 class="form-title heading-large">Check a licence or certificate</h1>
           <form class="form" action="{{url_for('frontend.index')}}" method="POST">
             <div class="form-group">
               <div class="{% if form.register_id.errors %}error{% endif %}">
-                {{ form.register_id.label(class_="form-label-bold")}}
+                <label class="form-label-bold" for="register_id">Enter licence or certificate ID</label>
                 <span class="form-hint">
-                  Check a register using a register ID - this is normally a word and some number or letters, separated by a colon.
+                  This is normally a word and some numbers or letters, separated by a colon.
                   <br>
-                    For example food-hygiene:2764
+                    For example, food-hygiene:2764
                 </span>
                 {{ form.register_id(class_="form-control")|safe }}
                 {% if form.register_id.errors %}
