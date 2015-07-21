@@ -12,7 +12,7 @@
 
         <h1 class="heading-large">{{entry.entry.name}}</h1>
 
-        <p><img src="{{ asset_path }}images/ratings/rating-{{entry.entry.rating}}.png"/></p>
+        <p><img src="{{ asset_path }}images/ratings/rating-{{entry.entry.rating | lower | replace(' ','-')}}.png"/></p>
 
         <h2 class="heading-small">Date of rating</h2>
         <p>{{entry.entry['date-of-rating']}}</p>
