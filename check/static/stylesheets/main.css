@@ -1380,6 +1380,7 @@ ol {
     margin-top: 50px;
     background: #DEE0E2;
     padding: 20px;
+    margin-left: 15px;
 }
 
 @media (max-width: 640px) {
