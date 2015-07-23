@@ -41,6 +41,11 @@
           <a href="{{url_for('frontend.index')}}" class="button">Check another licence or certificate</a>
           </div>
       </div>
+      <div class="grid-row">
+            <div class="column-half origin-panel">
+                This page uses data from the <a href="http://food-hygiene/openregister.org/hash/{{entry.hash}}">Food Hygiene Register</a>
+            </div>
+      </div>
     {% else %}
       <div class="grid-row">
         <div class="column-two-thirds">

@@ -46,7 +46,6 @@ def check(register, key):
         message = "We couldn't find a record for %s:%s" % (register, key)
         flash(message)
         if resp.status_code == 404:
-            current_app.logger.info('NO ENTRY')
             return render_template('check.html', register=register, key=key), 404
         abort(resp.status_code)
     except KeyError as e:

@@ -1376,6 +1376,12 @@ ol {
   width: 75%;
 }
 
+.origin-panel {
+    margin-top: 50px;
+    background: #DEE0E2;
+    padding: 20px;
+}
+
 @media (max-width: 640px) {
     .related-container {
       border: none;
